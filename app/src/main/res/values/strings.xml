@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">QR CODE</string>
+
+    <string name="description_for_barcode">test</string>
+</resources>
