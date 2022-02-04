@@ -11,6 +11,8 @@ import com.example.qrcode.sample1.Sample1
 import com.example.qrcode.sample2.Sample2
 import com.google.android.material.button.MaterialButton
 
+// to create qr code for test in web=> https://goqr.me/
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var btn1 : MaterialButton
