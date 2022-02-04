@@ -23,10 +23,10 @@ class Sample2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sample2)
 
-        findView()
-        checkPermission()
-        init()
-        listener()
+//        findView()
+//        checkPermission()
+//        init()
+//        listener()
     }
 
     private fun init() {
@@ -80,16 +80,16 @@ class Sample2 : AppCompatActivity() {
         scannerView = findViewById(R.id.scanner_view)
     }
 
-    override fun onResume() {
-        super.onResume()
-        codeScanner.startPreview()
-    }
-
-    override fun onPause() {
-        codeScanner.releaseResources()
-        super.onPause()
-    }
-
+//    override fun onResume() {
+//        super.onResume()
+//        codeScanner.startPreview()
+//    }
+//
+//    override fun onPause() {
+//        codeScanner.releaseResources()
+//        super.onPause()
+//    }
+//
     companion object {
         private const val RC_PERMISSION = 10
     }
