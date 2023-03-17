@@ -1,36 +1,33 @@
-/**
- * To Generate Sample Qr Code ===> http://goqr.me/
- */
-
 package com.example.qrcode
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.qrcode.databinding.ActivityMainBinding
 import com.example.qrcode.sample1.Sample1
 import com.example.qrcode.sample2.Sample2
-import com.google.android.material.button.MaterialButton
 
 // to create qr code for test in web=> https://goqr.me/
-
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var btn1 : MaterialButton
-    private lateinit var btn2 : MaterialButton
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
-        btn1 = findViewById(R.id.btn_1)
-        btn2 = findViewById(R.id.btn_2)
+        init()
+    }
 
+    private fun init() = binding.apply {
         btn1.setOnClickListener {
-            startActivity(Intent(this , Sample1::class.java))
+            startActivity(Intent(this@MainActivity, Sample1::class.java))
         }
 
         btn2.setOnClickListener {
-            startActivity(Intent(this , Sample2::class.java))
+            startActivity(Intent(this@MainActivity, Sample2::class.java))
         }
     }
 

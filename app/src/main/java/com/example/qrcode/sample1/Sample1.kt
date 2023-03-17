@@ -2,10 +2,8 @@ package com.example.qrcode.sample1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.Toast
-import com.example.qrcode.R
-import com.google.android.material.button.MaterialButton
+import com.example.qrcode.databinding.ActivitySample1Binding
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.client.android.Intents
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -16,57 +14,55 @@ import java.lang.Exception
 
 class Sample1 : AppCompatActivity() {
 
-    //region widgets
-    private lateinit var btnScan : MaterialButton
-    private lateinit var btnGenerate : MaterialButton
-    private lateinit var imgQrCode : ImageView
-    //endregion
-
-    //region barcode
-    private val barcodeLauncher = registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
-        if (result.contents == null) {
-            val originalIntent = result.originalIntent
-            if (originalIntent == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
-            }
-            else if (originalIntent.hasExtra(Intents.Scan.MISSING_CAMERA_PERMISSION)) {
-                Toast.makeText(this, "Cancelled due to missing camera permission", Toast.LENGTH_LONG).show()
-            }
-        }
-        else {
-            Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
-        }
+    private val binding by lazy {
+        ActivitySample1Binding.inflate(layoutInflater)
     }
-    //endregion
+
+    private val barcodeLauncher =
+        registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
+            if (result.contents == null) {
+                val originalIntent = result.originalIntent
+                if (originalIntent == null) {
+                    Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+                } else if (originalIntent.hasExtra(Intents.Scan.MISSING_CAMERA_PERMISSION)) {
+                    Toast.makeText(
+                        this,
+                        "Cancelled due to missing camera permission",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            } else {
+                Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sample1)
+        setContentView(binding.root)
 
-        // region Find Views
-        imgQrCode = findViewById(R.id.img_qr_code)
-        btnScan = findViewById(R.id.btn_scan)
-        btnGenerate = findViewById(R.id.btn_generate)
-        //endregion
+        init()
+    }
 
-        // region On Click Listeners
+    private fun init() = binding.apply {
         btnScan.setOnClickListener {
             qrCode()
         }
         btnGenerate.setOnClickListener {
             generate()
         }
-        //endregion
-
     }
 
     private fun generate() {
         try {
             val barcodeEncoder = BarcodeEncoder()
-            val bitmap = barcodeEncoder.encodeBitmap("https://arashaltafi.ir", BarcodeFormat.QR_CODE, 400, 400)
-            imgQrCode.setImageBitmap(bitmap)
-        }
-        catch (e: Exception) {
+            val bitmap = barcodeEncoder.encodeBitmap(
+                "https://arashaltafi.ir",
+                BarcodeFormat.QR_CODE,
+                400,
+                400
+            )
+            binding.imgQrCode.setImageBitmap(bitmap)
+        } catch (e: Exception) {
             println(e.message)
         }
     }

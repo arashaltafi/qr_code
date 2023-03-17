@@ -6,19 +6,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".sample2.Sample2">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_sample2" />
-
     <com.budiyev.android.codescanner.CodeScannerView
-        android:visibility="gone"
         android:id="@+id/scanner_view"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="match_parent"
         app:autoFocusButtonColor="@android:color/white"
         app:autoFocusButtonVisible="true"
         app:flashButtonColor="@android:color/white"
@@ -31,6 +22,5 @@
         app:frameSize="0.75"
         app:frameThickness="2dp"
         app:maskColor="#77000000"/>
-
 
 </FrameLayout>
